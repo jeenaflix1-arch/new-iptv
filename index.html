@@ -29,7 +29,7 @@ if(c && (k==='U'||k==='u'||k==='S'||k==='s')) { e.preventDefault(); return false
 }, {capture:true});
 }catch(_){}
 })();
-const _q1=[117,91,114,74,118,81,103,88,110,117,104,73,112,95,97,119,111,111,79],_q2=[107,110,88,90,60,102,89,96,71,53,82,64,76,79,69,80,67,49,58,76,99,83,91];const _K=String.fromCharCode.apply(0,_q1)+String.fromCharCode.apply(0,_q2);function _dx(b){var s=atob(b),o="";for(var i=0;i<s.length;i++){o+=String.fromCharCode(s.charCodeAt(i)^_K.charCodeAt(i%_K.length)^((i*17+91)&255));}return o;}const XTREAM=Object.freeze({get server(){return _dx("VFhgq5HP0uX9u1Vvb1c=");},get user(){return _dx("SFZ9sYKJl7i8");},get pass(){return _dx("HgY+9trRkbg=");},port:80});const API_BASE=`http://${XTREAM.server}/player_api.php?username=${XTREAM.user}&password=${XTREAM.pass}`;const STREAM_BASE=`http://${XTREAM.server}`;
+const _q1=[117,91,114,74,118,81,103,88,110,117,104,73,112,95,97,119,111,111,79],_q2=[107,110,88,90,60,102,89,96,71,53,82,64,76,79,69,80,67,49,58,76,99,83,91];const _K=String.fromCharCode.apply(0,_q1)+String.fromCharCode.apply(0,_q2);function _dx(b){var s=atob(b),o="";for(var i=0;i<s.length;i++){o+=String.fromCharCode(s.charCodeAt(i)^_K.charCodeAt(i%_K.length)^((i*17+91)&255));}return o;}const XTREAM=Object.freeze({get server(){return _dx("VFhgq5HP0uX9u1Vvb1c=");},get user(){return _dx("SFZ9sYKJl7i8");},get pass(){return _dx("HgY+9trRkbg=");},port:80});const _JF_HTTPS=(typeof location!=='undefined'&&location.protocol==='https:');const _JF_SCHEME=_JF_HTTPS?'https://':'http://';const API_BASE=`${_JF_SCHEME}${XTREAM.server}/player_api.php?username=${XTREAM.user}&password=${XTREAM.pass}`;const STREAM_BASE=`${_JF_SCHEME}${XTREAM.server}`;
 const PROXIES = [
 u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
 u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
@@ -527,7 +527,7 @@ _a26('Stream not supported'); playerEl.classList.remove('loading');
 video.src = url;
 video.addEventListener('loadedmetadata', startWhenReady, {once:true});
 video.addEventListener('error', ()=>{
-if(video.src !== proxify(url)){ video.src = proxify(url); video.play().catch(()=>{}); }
+if(!video.dataset.jfFallback){video.dataset.jfFallback='1';var _alt=url.replace(/^http:\/\//i,'https://');if(_alt===url){_alt='https://corsproxy.io/?url='+encodeURIComponent(url);}video.src=_alt;video.play().catch(function(){video.src='https://corsproxy.io/?url='+encodeURIComponent(url);video.play().catch(function(){});}); }
 }, {once:true});
 document.getElementById('qualityBtn').style.display='none';
 }
